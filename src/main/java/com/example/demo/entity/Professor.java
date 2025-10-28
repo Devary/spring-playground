@@ -8,13 +8,10 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,31 +24,22 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "teams")
+@Table(name = "professors")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Team {
+public class Professor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(nullable = false, unique = true, length = 150)
+    @Column(nullable = false, length = 150)
     private String name;
 
-    @Column(length = 500)
-    private String description;
+    @Column(nullable = false, unique = true, length = 150)
+    private String email;
 
-    @OneToOne(mappedBy = "leadTeam", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private User lead;
-
-    @OneToMany(mappedBy = "mainTeam", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "professor", fetch = FetchType.LAZY)
     @Builder.Default
     @JsonIgnore
-    private Set<User> members = new HashSet<>();
-
-    @ManyToMany(mappedBy = "supportingTeams", fetch = FetchType.LAZY)
-    @Builder.Default
-    @JsonIgnore
-    private Set<User> supporters = new HashSet<>();
+    private Set<Course> courses = new HashSet<>();
 }
