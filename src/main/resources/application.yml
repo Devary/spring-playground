@@ -1,0 +1,20 @@
+---
+spring:
+  config:
+    activate:
+      on-profile: yaml
+  datasource:
+    url: jdbc:postgresql://localhost:5432/demo_yaml
+    username: demo
+    password: demo
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+demo:
+  security:
+    jwt:
+      secret: ThisIsAnotherSecureJwtSecretKeyValueForYamlProfile456
+      issuer: demo-app-yaml
+      expiration-seconds: 7200
