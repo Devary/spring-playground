@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -84,8 +85,8 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.OPTIONS)
     public ResponseEntity<Void> options() {
-        return ResponseEntity.ok().allow(RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.PATCH,
-                RequestMethod.DELETE, RequestMethod.HEAD, RequestMethod.OPTIONS).build();
+        return ResponseEntity.ok().allow(HttpMethod.GET, HttpMethod.POST, HttpMethod.PUT, HttpMethod.PATCH,
+                HttpMethod.DELETE, HttpMethod.HEAD, HttpMethod.OPTIONS).build();
     }
 
     @GetMapping("/teams/{teamId}/supporters")
